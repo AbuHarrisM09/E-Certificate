@@ -1,0 +1,8 @@
+django
+djangorestframework
+djangorestframework-simplejwt
+django-redis
+qrcode
+reportlab
+mysqlclient
+mysql-connector-python
