@@ -6,3 +6,4 @@ qrcode
 reportlab
 mysqlclient
 mysql-connector-python
+opencv-python-headless

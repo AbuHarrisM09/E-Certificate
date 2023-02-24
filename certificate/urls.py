@@ -1,10 +1,10 @@
 from django.urls import path
-#from .views import dashboard, create, data, detail, delete
+from .views import create
 
 urlpatterns = [
     #dashboard
     #path("dashboard/", dashboard), #halaman setelah login, menampilkan excel yang sudah di upload
-    #path("dashboard/new/", create), #halaman form untuk input manual atau upload CSV
+    path("dashboard/new/", create), #halaman form untuk input manual atau upload CSV
 
     #certificate
     #path("certificate/", data), #halaman menampilkan sertifikat yang sudah jadi
