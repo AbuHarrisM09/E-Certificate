@@ -17,11 +17,11 @@ def create(request):
         img = cv2.imread(uploaded_file_url[1:])
 
         # menambahkan teks
-        font = cv2.FONT_HERSHEY_SIMPLEX
+        font = cv2.FONT_HERSHEY_PLAIN
         text = request.POST['text'] # memperoleh teks yang diinputkan
-        color = (255, 255, 255)
+        color = (0, 0, 0)
         thickness = 2
-        org = (50, 50)
+        org = (50, 400)
         img = cv2.putText(img, text, org, font, thickness, color, cv2.LINE_AA)
 
         # menyimpan gambar
