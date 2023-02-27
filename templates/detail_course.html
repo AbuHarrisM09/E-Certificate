@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% if data.template %}
+    <img src="{{ data.template.url }}" alt="{{ data.course_name}}">
+    {% endif %}
+    {{ data.description }}
+
+    <p><strong>Action:</strong> | <a href="{% url 'course:update_course' data.id %}">Update course</a></p>
+    <a href="{% url 'course:delete_course' data.id %}">Hapus</a>
+</body>
+</html>
