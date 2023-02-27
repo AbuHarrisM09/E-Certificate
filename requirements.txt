@@ -8,3 +8,4 @@ mysqlclient
 mysql-connector-python
 opencv-python-headless
 hashlib
+xhtml2pdf
