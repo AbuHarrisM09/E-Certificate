@@ -10,6 +10,10 @@
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
+        <div class="form-group">
+            <label for="signature">Signature:</label>
+            <input type="file" name="signature" class="form-control" required>
+        </div>
         <input type="submit" value="Simpan">
     </form>
 </body>
