@@ -50,6 +50,13 @@ INSTALLED_APPS = [
     'corsheaders'
 ]
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp-relay.sendinblue.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'ihtishamkoernia@gmail.com'
+EMAIL_HOST_PASSWORD = 'yHNRP6wh0x8cqVsm'
+
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.AllowAny',

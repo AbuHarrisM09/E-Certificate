@@ -9,3 +9,6 @@ mysql-connector-python
 opencv-python-headless
 hashlib
 xhtml2pdf
+django-cors-headers
+opencv-python
+xhtml2pdf
