@@ -136,6 +136,13 @@ class ChangePasswordView(GenericAPIView):
         # Get password baru
         data = self.request.data
         password = request.data.get('password')
+        confirm_password = request.data.get('confirm_password')
+
+        # Validasi password baru
+        if not password:
+            return Response({'detail': 'Password tidak boleh Kosong!'}, status=status.HTTP_400_BAD_REQUEST)
+        if password != confirm_password:
+            return Response({'detail': 'Password tidak sesuai!'}, status=status.HTTP_400_BAD_REQUEST)
 
         # Generate access token menggunakan refresh token
         refresh = request.COOKIES.get('refresh_token')
