@@ -76,6 +76,7 @@ def delete(request, id):
         return HttpResponseRedirect('../../')
     return render(request, 'delete_course.html', context)
 
+
 def add_signature_to_image(image_path, signature_path):
     # Load gambar menggunakan OpenCV
     img = cv2.imread(image_path)
@@ -83,19 +84,30 @@ def add_signature_to_image(image_path, signature_path):
     # Load tanda tangan menggunakan OpenCV
     signature = cv2.imread(signature_path, cv2.IMREAD_UNCHANGED)
 
-    # Resize tanda tangan sesuai ukuran template
-    resized_signature = cv2.resize(signature, (0, 0), None, 3, 3)
-
-    # Pastikan ukuran gambar sama
-    if resized_signature.shape[0] != img.shape[0] or resized_signature.shape[1] != img.shape[1]:
-        resized_signature = cv2.resize(resized_signature, (img.shape[1], img.shape[0]))
+    # Resize tanda tangan sesuai ukuran yang diinginkan
+    resized_signature = cv2.resize(signature, (130, 80))
 
     # Overlay gambar tanda tangan ke gambar template
     alpha_s = resized_signature[:, :, 3] / 255.0 if resized_signature.shape[2] == 4 else resized_signature[:, :, 0]
-
     alpha_l = 1.0 - alpha_s
+
+    # Ambil region of interest (ROI) untuk menempatkan tanda tangan pada gambar template
+    x_offset = 110
+    y_offset = 585
+    y1, y2 = y_offset, y_offset + resized_signature.shape[0]
+    x1, x2 = x_offset, x_offset + resized_signature.shape[1]
+
+    # Jika ukuran tanda tangan melebihi ukuran gambar template, maka gunakan ukuran gambar template sebagai ukuran tanda tangan
+    if y2 > img.shape[0]:
+        y2 = img.shape[0]
+        resized_signature = resized_signature[:y2-y1, :, :]
+
+    if x2 > img.shape[1]:
+        x2 = img.shape[1]
+        resized_signature = resized_signature[:, :x2-x1, :]
+
     for c in range(0, 3):
-        img[:, :, c] = (alpha_s * resized_signature[:, :, c] + alpha_l * img[:, :, c])
+        img[y1:y2, x1:x2, c] = (alpha_s * resized_signature[:, :, c] + alpha_l * img[y1:y2, x1:x2, c])
 
     # Simpan gambar yang sudah diedit
     cv2.imwrite(image_path, img)
